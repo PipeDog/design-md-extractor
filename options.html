@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DESIGN.md Extractor Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="hero">
+        <div class="hero-top">
+          <div>
+            <p class="eyebrow" data-i18n="settings.heroEyebrow">混合分析器</p>
+            <h1 data-i18n="settings.title">DESIGN.md Extractor 设置</h1>
+          </div>
+          <div class="locale-switcher">
+            <select name="uiLanguage" id="uiLanguage"></select>
+          </div>
+        </div>
+        <p class="hero-copy" data-i18n="settings.heroCopy">
+          插件默认可在本地规则模式下工作。填写模型地址、API Key、模型名和协议后，会自动切换到增强分析模式。
+        </p>
+        <p id="ai-hint" class="hero-hint"></p>
+      </header>
+
+      <form id="settings-form" class="form-grid">
+        <section class="panel">
+          <div class="panel-head panel-head--split">
+            <div>
+              <p class="eyebrow" data-i18n="settings.aiEyebrow">Model</p>
+              <h2 data-i18n="settings.aiSettings">模型连接参数</h2>
+            </div>
+            <label class="enable-ai-inline" id="enable-ai-card">
+              <span class="enable-ai-copy">
+                <span class="enable-ai-title" data-i18n="settings.enableAi">启动 AI 分析生成</span>
+                <span class="enable-ai-subtitle" data-i18n="settings.enableAiHint">
+                  推荐开启，生成质量明显更高
+                </span>
+              </span>
+              <span class="enable-ai-toggle">
+                <input type="checkbox" name="enabled" />
+                <span class="enable-ai-track" aria-hidden="true">
+                  <span class="enable-ai-thumb"></span>
+                </span>
+              </span>
+            </label>
+          </div>
+
+          <div class="grid two-cols">
+            <label>
+              <span class="label-row">
+                <strong class="required-marker">*</strong>
+                <span data-i18n="settings.baseUrl">Base URL</span>
+              </span>
+              <input name="baseUrl" type="url" placeholder="https://api.example.com" />
+            </label>
+            <label>
+              <span class="label-row">
+                <strong class="required-marker">*</strong>
+                <span data-i18n="settings.protocol">协议</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="protocol">?</span>
+              </span>
+              <select name="protocol" id="protocol"></select>
+            </label>
+          </div>
+
+          <div class="grid two-cols">
+            <label>
+              <span class="label-row">
+                <span data-i18n="settings.endpointPath">Endpoint Path</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="endpointPath">?</span>
+              </span>
+              <input name="endpointPath" id="endpointPath" type="text" placeholder="/v1/responses" />
+            </label>
+            <label>
+              <span class="label-row">
+                <strong class="required-marker">*</strong>
+                <span data-i18n="settings.model">模型名</span>
+              </span>
+              <input name="model" type="text" placeholder="gpt-5.2" />
+            </label>
+          </div>
+
+          <div class="grid two-cols">
+            <label>
+              <span class="label-row">
+                <strong class="required-marker">*</strong>
+                <span data-i18n="settings.apiKey">API Key</span>
+              </span>
+              <input name="apiKey" type="password" placeholder="sk-..." />
+            </label>
+            <label>
+              <span class="label-row">
+                <span data-i18n="settings.outputLanguage">输出语言</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="language">?</span>
+              </span>
+              <select name="language" id="language"></select>
+            </label>
+          </div>
+
+          <div class="grid three-cols">
+            <label>
+              <span class="label-row">
+                <span data-i18n="settings.temperature">Temperature</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="temperature">?</span>
+              </span>
+              <input name="temperature" type="number" min="0" max="2" step="0.1" />
+            </label>
+            <label>
+              <span class="label-row">
+                <span data-i18n="settings.maxOutputTokens">Max Output Tokens</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="maxOutputTokens">?</span>
+              </span>
+              <input name="maxOutputTokens" type="number" min="256" step="1" />
+            </label>
+            <label>
+              <span class="label-row">
+                <span data-i18n="settings.timeoutMs">Timeout (ms)</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="timeoutMs">?</span>
+              </span>
+              <input name="timeoutMs" type="number" min="1000" step="1000" />
+            </label>
+          </div>
+
+          <label>
+            <span class="label-row">
+              <span data-i18n="settings.systemPromptOverride">System Prompt Override</span>
+              <span class="help-tip" tabindex="0" data-tooltip-key="systemPromptOverride">?</span>
+            </span>
+            <input name="systemPromptOverride" type="text" placeholder="可选：覆盖默认系统提示词" />
+          </label>
+        </section>
+
+        <details class="panel collapsible-panel">
+          <summary class="panel-summary">
+            <span>
+              <span class="eyebrow" data-i18n="settings.analysisEyebrow">Analysis</span>
+              <span class="summary-title" data-i18n="settings.analysisTitle">分析与导出偏好</span>
+            </span>
+            <span class="summary-chevron" aria-hidden="true"></span>
+          </summary>
+
+          <div class="panel-content grid two-cols">
+            <label class="switch-row">
+              <span class="label-row">
+                <span data-i18n="settings.redactInputs">脱敏输入内容</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="redactInputs">?</span>
+              </span>
+              <input name="redactInputs" type="checkbox" />
+            </label>
+            <label class="switch-row">
+              <span class="label-row">
+                <span data-i18n="settings.autoDownloadAfterGeneration">自动下载生成结果</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="autoDownloadAfterGeneration">?</span>
+              </span>
+              <input name="autoDownloadAfterGeneration" type="checkbox" />
+            </label>
+            <label class="switch-row">
+              <span class="label-row">
+                <span data-i18n="settings.includeColorTokens">包含颜色 token</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="includeColorTokens">?</span>
+              </span>
+              <input name="includeColorTokens" type="checkbox" />
+            </label>
+            <label class="switch-row">
+              <span class="label-row">
+                <span data-i18n="settings.includeTypographyTokens">包含字体 token</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="includeTypographyTokens">?</span>
+              </span>
+              <input name="includeTypographyTokens" type="checkbox" />
+            </label>
+            <label class="switch-row">
+              <span class="label-row">
+                <span data-i18n="settings.includeSpacingHeuristics">包含间距启发式</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="includeSpacingHeuristics">?</span>
+              </span>
+              <input name="includeSpacingHeuristics" type="checkbox" />
+            </label>
+            <label class="switch-row">
+              <span class="label-row">
+                <span data-i18n="settings.includeRawAuditAppendix">附加原始审计附录</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="includeRawAuditAppendix">?</span>
+              </span>
+              <input name="includeRawAuditAppendix" type="checkbox" />
+            </label>
+            <label class="switch-row">
+              <span class="label-row">
+                <span data-i18n="settings.includeFrontmatter">包含 Frontmatter</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="includeFrontmatter">?</span>
+              </span>
+              <input name="includeFrontmatter" type="checkbox" />
+            </label>
+          </div>
+
+          <div class="panel-content grid two-cols">
+            <label>
+              <span class="label-row">
+                <span data-i18n="settings.maxDomNodes">最大节点数</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="maxDomNodes">?</span>
+              </span>
+              <input name="maxDomNodes" type="number" min="50" step="10" />
+            </label>
+            <label>
+              <span class="label-row">
+                <span data-i18n="settings.filenameTemplate">文件名模板</span>
+                <span class="help-tip" tabindex="0" data-tooltip-key="filenameTemplate">?</span>
+              </span>
+              <input name="filenameTemplate" type="text" placeholder="{domain}-DESIGN.md" />
+            </label>
+          </div>
+        </details>
+
+        <details class="panel collapsible-panel">
+          <summary class="panel-summary">
+            <span>
+              <span class="eyebrow" data-i18n="settings.rulesEyebrow">Rules</span>
+              <span class="summary-title" data-i18n="settings.rulesTitle">站点规则与隐私说明</span>
+            </span>
+            <span class="summary-chevron" aria-hidden="true"></span>
+          </summary>
+
+          <label class="panel-content">
+            <span data-i18n="settings.siteAllowlist">允许列表（每行一个域名片段，可留空）</span>
+            <textarea name="siteAllowlist" rows="4" placeholder="example.com"></textarea>
+          </label>
+
+          <label class="panel-content">
+            <span data-i18n="settings.siteBlocklist">排除列表（每行一个域名片段）</span>
+            <textarea name="siteBlocklist" rows="4" placeholder="mail.google.com"></textarea>
+          </label>
+
+          <p class="note panel-content" data-i18n="settings.privacyNote">
+            启用 AI 增强分析时，插件会发送结构化页面摘要到你配置的远程模型接口，不会直接上传完整原始 DOM 文件。
+          </p>
+        </details>
+
+        <footer class="footer-bar">
+          <button type="submit" class="primary" data-i18n="settings.saveButton">保存设置</button>
+          <p
+            id="save-status"
+            class="save-status"
+            data-i18n="settings.unsaved"
+            data-tone="idle"
+            aria-live="polite"
+          >
+            尚未保存。
+          </p>
+        </footer>
+      </form>
+    </main>
+
+    <div id="save-feedback" class="save-feedback" hidden aria-live="polite"></div>
+
+    <dialog id="enable-ai-dialog" class="confirm-dialog">
+      <form method="dialog" class="confirm-dialog__content">
+        <p class="eyebrow">AI</p>
+        <h2 data-i18n="settings.enableAiPromptTitle">当前未启用 AI 分析生成</h2>
+        <p class="confirm-dialog__copy" data-i18n="settings.enableAiPromptBody">
+          如果保持关闭，插件会优先使用本地模式，生成质量会明显弱于 AI 分析。
+        </p>
+        <div class="confirm-dialog__actions">
+          <button
+            type="submit"
+            class="secondary"
+            value="keep-local"
+            data-i18n="settings.enableAiPromptKeepLocal"
+          >
+            继续以本地模式保存
+          </button>
+          <button
+            type="submit"
+            class="primary"
+            value="enable-ai"
+            data-i18n="settings.enableAiPromptEnable"
+          >
+            启用 AI 并保存
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="src/options.js"></script>
+  </body>
+</html>

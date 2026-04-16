@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DESIGN.md Extractor</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup-shell">
+      <section class="control-card">
+        <div class="panel-top">
+          <div>
+            <p class="eyebrow">DESIGN.md Extractor</p>
+            <h1 data-i18n="popup.analyzeButton">分析并生成 DESIGN.md</h1>
+          </div>
+          <div id="mode-state" class="mode-switch" data-mode="local">
+            <button
+              id="mode-local-btn"
+              class="mode-switch__option is-active"
+              type="button"
+              data-mode="local"
+              data-i18n="popup.localMode"
+            >
+              本地模式 · 基础稿
+            </button>
+            <button
+              id="mode-ai-btn"
+              class="mode-switch__option"
+              type="button"
+              data-mode="hybrid"
+              data-i18n="popup.hybridMode"
+            >
+              AI 模式 · 增强提炼
+            </button>
+          </div>
+        </div>
+
+        <p id="page-url" class="page-url">读取中...</p>
+
+        <div class="button-row">
+          <button id="analyze-btn" class="primary" data-i18n="popup.analyzeButton">
+            分析并生成 DESIGN.md
+          </button>
+          <button id="settings-btn" class="secondary" data-i18n="popup.settingsButton">设置</button>
+        </div>
+
+        <p id="progress" class="progress-text" data-i18n="popup.waiting">等待开始。</p>
+        <div id="warning" class="warning" hidden></div>
+      </section>
+    </main>
+
+    <dialog id="local-mode-dialog" class="mode-dialog">
+      <form method="dialog" class="mode-dialog__content">
+        <h2 data-i18n="popup.localPromptTitle">当前正在使用本地模式</h2>
+        <p class="mode-dialog__copy" data-i18n="popup.localPromptBody">
+          本地模式会直接输出基础版 DESIGN.md。连接 AI 后，结构完整度、语言质量和参考文档拟合度都会更好。
+        </p>
+        <div class="mode-dialog__actions">
+          <button
+            id="local-continue-btn"
+            class="secondary"
+            value="continue"
+            data-i18n="popup.localPromptContinue"
+          >
+            继续本地生成
+          </button>
+          <button
+            id="local-settings-btn"
+            class="primary"
+            value="settings"
+            data-i18n="popup.localPromptPrimary"
+          >
+            去设置 AI
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="src/popup.js"></script>
+  </body>
+</html>
