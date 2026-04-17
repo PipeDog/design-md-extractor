@@ -3,6 +3,12 @@
   "name": "DESIGN.md Extractor",
   "version": "0.2.0",
   "description": "Analyze the current webpage UI and export a generated DESIGN.md file.",
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
   "permissions": ["activeTab", "storage", "downloads", "scripting", "tabs"],
   "host_permissions": ["http://*/*", "https://*/*"],
   "background": {
@@ -11,7 +17,11 @@
   },
   "action": {
     "default_title": "DESIGN.md Extractor",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png"
+    }
   },
   "options_page": "options.html",
   "content_scripts": [

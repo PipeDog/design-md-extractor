@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "bash scripts/build.sh",
+    "generate:store-assets": "python3 scripts/generate_store_assets.py",
     "test": "node --test"
   }
 }

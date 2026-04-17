@@ -23,6 +23,9 @@ cp "$ROOT_DIR/options.css" "$PACKAGE_DIR/"
 cp "$ROOT_DIR/popup.html" "$PACKAGE_DIR/"
 cp "$ROOT_DIR/popup.css" "$PACKAGE_DIR/"
 cp -R "$ROOT_DIR/src" "$PACKAGE_DIR/"
+if [ -d "$ROOT_DIR/assets" ]; then
+  cp -R "$ROOT_DIR/assets" "$PACKAGE_DIR/"
+fi
 
 echo "Creating zip archive..."
 (
